@@ -1,5 +1,4 @@
 Flask==3.0.0
 flask-mysqldb==2.0.0
 gunicorn 
-mysql-connector-python 
-panda
+mysqlclient
