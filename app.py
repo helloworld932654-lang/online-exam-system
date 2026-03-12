@@ -8,6 +8,7 @@ import uuid
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.config["DEBUG"] = True
 app.secret_key = 'your_secret_key_here'  # Change this in production
 
 # ============ MySQL Configuration ============
