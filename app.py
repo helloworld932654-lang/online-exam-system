@@ -12,9 +12,11 @@ app.config["DEBUG"] = True
 app.secret_key = 'your_secret_key_here'  # Change this in production
 
 # ============ MySQL Configuration ============
-DB_HOST = "db.cnptajqxlhqkeyxbsuqk.supabase.co"
+# ============ PostgreSQL Configuration ============
+
+DB_HOST = "aws-1-ap-south-1.pooler.supabase.com"
 DB_NAME = "postgres"
-DB_USER = "postgres"
+DB_USER = "postgres.cnptajqxlhqkeyxbsuqk"
 DB_PASS = "Nutan@932654"
 DB_PORT = 5432
 # ============ Uploads Configuration ============
