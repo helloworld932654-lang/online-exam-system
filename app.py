@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-import MySQLdb
+import psycopg2
 import random
 import csv
 import io
@@ -12,24 +12,22 @@ app.config["DEBUG"] = True
 app.secret_key = 'your_secret_key_here'  # Change this in production
 
 # ============ MySQL Configuration ============
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'nutan@932654'  # Your MySQL password
-app.config['MYSQL_DB'] = 'online_exam'
-app.config['MYSQL_PORT'] = 3307
-
+DB_HOST = "db.cnptajqxlhqkeyxbsuqk.supabase.co"
+DB_NAME = "postgres"
+DB_USER = "postgres"
+DB_PASS = "Nutan@932654"
+DB_PORT = 5432
 # ============ Uploads Configuration ============
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads', 'questions')
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def get_db():
-    """Create and return a database connection"""
-    return MySQLdb.connect(
-        host=app.config['MYSQL_HOST'],
-        user=app.config['MYSQL_USER'],
-        passwd=app.config['MYSQL_PASSWORD'],
-        db=app.config['MYSQL_DB'],
-        port=app.config.get('MYSQL_PORT', 3306)
+    return psycopg2.connect(
+        host=DB_HOST,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASS,
+        port=DB_PORT
     )
 
 # ============ HOME / LOGIN ============
