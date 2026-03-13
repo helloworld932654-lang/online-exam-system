@@ -77,12 +77,15 @@ def register():
         cur = db.cursor()
         try:
             cur.execute("INSERT INTO users (name, email, password, role) VALUES (%s, %s, %s, 'student')",
-                        (name, email, password))
+                (name, email, password))
             db.commit()
             flash('Registration successful! Please login.', 'success')
             return redirect(url_for('login'))
-        except MySQLdb.IntegrityError:
+            
+        except psycopg2.errors.UniqueViolation:
+            db_rollback()
             flash('Email already exists!', 'danger')
+
         finally:
             cur.close()
             db.close()
@@ -100,7 +103,7 @@ def dashboard():
     cur = db.cursor()
     
     # Get user results
-    cur.execute("SELECT score, exam_date, subject FROM results WHERE user_id=%s ORDER BY exam_date DESC", (session['user_id'],))
+    cur.execute("SELECT score, exam_date FROM results WHERE user_id=%s ORDER BY exam_date DESC", (session['user_id'],))
     results = cur.fetchall()
     
     # Get available subjects
